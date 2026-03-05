@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sotto — Tiramisù & Grocery | 沖縄・宜野湾</title>
+<meta name="description" content="トレヴィーゾの記憶を、沖縄から一さじずつ。本場イタリアの正統製法で作るティラミス専門店 Sotto。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --mid-gray: #999999;
+  --dark-gray: #555555;
+  --black: #1a1a1a;
+  --accent-warm: #c4a265;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Noto Sans JP', sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ========================================
+   FADE-IN ANIMATIONS
+   ======================================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-slow {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-slow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.6s ease, box-shadow 0.6s ease, padding 0.4s ease;
+}
+
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  padding: 1rem 3rem;
+}
+
+.nav-logo img {
+  height: 28px;
+  transition: opacity 0.6s ease;
+}
+
+.nav-logo .logo-white {
+  display: block;
+}
+
+.nav-logo .logo-dark {
+  display: none;
+}
+
+.nav.scrolled .nav-logo .logo-white {
+  display: none;
+}
+
+.nav.scrolled .nav-logo .logo-dark {
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: color 0.4s ease, opacity 0.3s ease;
+  opacity: 0.85;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.nav.scrolled .nav-links a {
+  color: var(--black);
+}
+
+.nav-links .nav-ig svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+  transition: fill 0.4s ease;
+}
+
+.nav.scrolled .nav-links .nav-ig svg {
+  fill: var(--black);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1.5px;
+  background: var(--white);
+  transition: all 0.4s ease;
+}
+
+.nav.scrolled .hamburger span {
+  background: var(--black);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--white);
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+.hero.loaded .hero-img {
+  transform: scale(1);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--white);
+}
+
+.hero-logo {
+  width: 200px;
+  margin: 0 auto 2rem;
+  opacity: 0;
+  animation: heroFadeIn 2s 0.5s ease forwards;
+}
+
+.hero-sub {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: heroFadeIn 2s 1s ease forwards;
+}
+
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  line-height: 2;
+  opacity: 0;
+  animation: heroFadeIn 2s 1.5s ease forwards;
+}
+
+@keyframes heroFadeIn {
+  to { opacity: 1; }
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: heroFadeIn 2s 2s ease forwards;
+}
+
+.hero-scroll span {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  animation: scrollLine 2s infinite;
+}
+
+@keyframes scrollLine {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ========================================
+   SECTION COMMON
+   ======================================== */
+.section-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-bottom: 1rem;
+}
+
+.section-title-en {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+
+.section-title-ja {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--mid-gray);
+  margin-bottom: 3rem;
+}
+
+.section-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--mid-gray);
+  margin: 0 auto 3rem;
+}
+
+/* ========================================
+   PHILOSOPHY
+   ======================================== */
+.philosophy {
+  padding: 10rem 2rem 8rem;
+}
+
+.philosophy-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.philosophy-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-image img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 1.5s ease;
+}
+
+.philosophy-image:hover img {
+  transform: scale(1);
+}
+
+.philosophy-text {
+  padding: 2rem 0;
+}
+
+.philosophy-text .section-label {
+  text-align: left;
+}
+
+.philosophy-text .section-title-en {
+  text-align: left;
+}
+
+.philosophy-text .section-title-ja {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.philosophy-subtitle {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: var(--mid-gray);
+  margin-bottom: 3rem;
+}
+
+.philosophy-body p {
+  font-size: 0.88rem;
+  line-height: 2.2;
+  color: var(--dark-gray);
+  margin-bottom: 2rem;
+}
+
+/* Features */
+.philosophy-features {
+  padding: 8rem 2rem;
+  background: var(--light-gray);
+}
+
+.philosophy-features-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.feature-item-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.feature-item-desc {
+  font-size: 0.8rem;
+  color: var(--mid-gray);
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   MENU
+   ======================================== */
+.menu-section {
+  padding: 10rem 0 0;
+}
+
+.menu-header {
+  text-align: center;
+  padding: 0 2rem 6rem;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+}
+
+.menu-item:nth-child(even) {
+  direction: rtl;
+}
+
+.menu-item:nth-child(even) > * {
+  direction: ltr;
+}
+
+.menu-item-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+}
+
+.menu-item:hover .menu-item-image img {
+  transform: scale(1.03);
+}
+
+.menu-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem;
+}
+
+.menu-item-name-ja {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item-name-en {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-bottom: 1.5rem;
+}
+
+.menu-item-price {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  margin-bottom: 2.5rem;
+}
+
+.menu-item-desc {
+  font-size: 0.85rem;
+  line-height: 2.2;
+  color: var(--dark-gray);
+}
+
+/* ========================================
+   STORY
+   ======================================== */
+.story-section {
+  padding: 12rem 2rem 8rem;
+}
+
+.story-header {
+  text-align: center;
+  margin-bottom: 8rem;
+}
+
+/* Satoshi */
+.story-person {
+  max-width: 1400px;
+  margin: 0 auto 10rem;
+  position: relative;
+}
+
+.story-person-image-wrap {
+  position: relative;
+  width: 55%;
+  overflow: hidden;
+}
+
+.story-person-image-wrap img {
+  width: 100%;
+  height: 75vh;
+  object-fit: cover;
+}
+
+.story-person-text-box {
+  position: absolute;
+  right: 0;
+  bottom: 6rem;
+  width: 50%;
+  background: var(--white);
+  padding: 4rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+}
+
+.story-person:nth-child(odd) .story-person-image-wrap {
+  margin-left: auto;
+}
+
+.story-person:nth-child(odd) .story-person-text-box {
+  left: 0;
+  right: auto;
+}
+
+.story-person-role {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-bottom: 0.5rem;
+}
+
+.story-person-name-en {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.story-person-name-ja {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--mid-gray);
+  margin-bottom: 2rem;
+}
+
+.story-person-body {
+  font-size: 0.82rem;
+  line-height: 2.2;
+  color: var(--dark-gray);
+  margin-bottom: 2.5rem;
+}
+
+/* Timeline */
+.story-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  padding-top: 1rem;
+}
+
+.story-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ddd;
+}
+
+.timeline-dot {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mid-gray);
+}
+
+.timeline-dot-year {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--black);
+}
+
+.timeline-dot-label {
+  font-size: 0.65rem;
+  color: var(--mid-gray);
+  margin-top: 0.2rem;
+}
+
+/* ========================================
+   MEDIA
+   ======================================== */
+.media-section {
+  padding: 10rem 2rem;
+  background: var(--light-gray);
+}
+
+.media-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.media-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+}
+
+.media-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--white);
+  transition: transform 0.4s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-4px);
+}
+
+.media-card-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+
+.media-card-detail {
+  font-size: 0.7rem;
+  color: var(--mid-gray);
+  line-height: 1.7;
+}
+
+/* ========================================
+   VOICES
+   ======================================== */
+.voices-section {
+  padding: 10rem 2rem;
+}
+
+.voices-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.voices-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.voice-card {
+  padding: 2.5rem;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.4s ease;
+}
+
+.voice-card:hover {
+  border-color: var(--mid-gray);
+}
+
+.voice-card-stars {
+  font-size: 0.75rem;
+  color: var(--accent-warm);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+}
+
+.voice-card-text {
+  font-size: 0.8rem;
+  line-height: 2;
+  color: var(--dark-gray);
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.voice-card-source {
+  font-size: 0.65rem;
+  color: var(--mid-gray);
+}
+
+.voice-card-source a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ========================================
+   SHOP INFO
+   ======================================== */
+.shopinfo-section {
+  padding: 10rem 2rem;
+  background: var(--light-gray);
+}
+
+.shopinfo-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.shopinfo-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.shopinfo-table {
+  width: 100%;
+}
+
+.shopinfo-table dl {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0;
+  border-top: 1px solid #ddd;
+}
+
+.shopinfo-table dt {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--mid-gray);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.shopinfo-table dd {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+  color: var(--dark-gray);
+}
+
+.shopinfo-note {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  background: var(--white);
+  font-size: 0.78rem;
+  line-height: 2;
+  color: var(--dark-gray);
+}
+
+.shopinfo-map {
+  width: 100%;
+  height: 400px;
+  background: #eee;
+}
+
+.shopinfo-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Phone CTA */
+.phone-cta {
+  max-width: 700px;
+  margin: 5rem auto 0;
+  text-align: center;
+  padding: 3rem;
+  border: 1px solid #ddd;
+}
+
+.phone-cta-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-bottom: 1rem;
+}
+
+.phone-cta-number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.phone-cta-number a {
+  color: var(--black);
+}
+
+.phone-cta-note {
+  font-size: 0.72rem;
+  color: var(--mid-gray);
+}
+
+/* ========================================
+   FAQ
+   ======================================== */
+.faq-section {
+  padding: 10rem 2rem;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid #eee;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--black);
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: var(--mid-gray);
+}
+
+.faq-question-icon {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--mid-gray);
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.faq-item.active .faq-question-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.faq-answer-inner {
+  padding: 0 0 2rem;
+  font-size: 0.82rem;
+  line-height: 2.2;
+  color: var(--dark-gray);
+}
+
+/* ========================================
+   ONLINE SHOP
+   ======================================== */
+.onlineshop-section {
+  padding: 10rem 2rem;
+  background: var(--light-gray);
+  text-align: center;
+}
+
+.onlineshop-text {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-size: 0.85rem;
+  line-height: 2.2;
+  color: var(--dark-gray);
+}
+
+.onlineshop-btn {
+  display: inline-block;
+  padding: 1rem 4rem;
+  border: 1px solid var(--black);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--black);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.onlineshop-btn:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ========================================
+   INSTAGRAM
+   ======================================== */
+.instagram-section {
+  padding: 10rem 2rem;
+}
+
+.instagram-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.instagram-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.instagram-grid .ig-embed-wrap {
+  min-width: 0;
+}
+
+.instagram-grid .ig-embed-wrap blockquote {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+.instagram-follow {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.instagram-follow a {
+  display: inline-block;
+  padding: 0.8rem 3rem;
+  border: 1px solid #ddd;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--dark-gray);
+  transition: border-color 0.3s ease;
+}
+
+.instagram-follow a:hover {
+  border-color: var(--black);
+}
+
+/* ========================================
+   SISTER SHOP (TOTTO)
+   ======================================== */
+.totto-section {
+  padding: 10rem 0;
+  background: var(--black);
+  color: var(--white);
+}
+
+.totto-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.totto-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.totto-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.totto-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem;
+}
+
+.totto-logo {
+  width: 120px;
+  margin-bottom: 2rem;
+}
+
+.totto-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 1rem;
+}
+
+.totto-name {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.totto-name-ja {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
+}
+
+.totto-desc {
+  font-size: 0.82rem;
+  line-height: 2.2;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+.totto-award {
+  font-size: 0.75rem;
+  color: var(--accent-warm);
+  margin-bottom: 0.5rem;
+}
+
+.totto-price {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+}
+
+.totto-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.totto-btn {
+  padding: 0.8rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.totto-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  width: 100px;
+  margin: 0 auto 2rem;
+  opacity: 0.3;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.footer-icons a svg {
+  width: 18px;
+  height: 18px;
+  fill: #ccc;
+  transition: fill 0.3s ease;
+}
+
+.footer-icons a:hover svg {
+  fill: var(--black);
+}
+
+.footer-copy {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #ccc;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .philosophy-image img {
+    height: 60vh;
+  }
+
+  .philosophy-features-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .menu-item {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .menu-item:nth-child(even) {
+    direction: ltr;
+  }
+
+  .menu-item-image img {
+    height: 50vh;
+  }
+
+  .menu-item-info {
+    padding: 4rem 3rem;
+  }
+
+  .story-person-image-wrap {
+    width: 100%;
+  }
+
+  .story-person-text-box {
+    position: relative;
+    width: 100%;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    margin-top: -3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: calc(100% - 4rem);
+  }
+
+  .story-person:nth-child(odd) .story-person-text-box {
+    left: auto;
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .voices-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shopinfo-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .instagram-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .totto-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .totto-info {
+    padding: 4rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .hero-logo {
+    width: 140px;
+  }
+
+  .hero-sub {
+    font-size: 0.75rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.82rem;
+    padding: 0 2rem;
+  }
+
+  .philosophy {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .philosophy-image img {
+    height: 50vh;
+  }
+
+  .philosophy-features {
+    padding: 5rem 1.5rem;
+  }
+
+  .philosophy-features-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .menu-section {
+    padding: 6rem 0 0;
+  }
+
+  .menu-header {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .menu-item-image img {
+    height: 40vh;
+  }
+
+  .menu-item-info {
+    padding: 3rem 1.5rem;
+  }
+
+  .story-section {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .story-person {
+    margin-bottom: 6rem;
+  }
+
+  .story-person-image-wrap img {
+    height: 50vh;
+  }
+
+  .story-person-text-box {
+    padding: 2.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  .media-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .voices-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .voices-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shopinfo-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .faq-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .onlineshop-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .instagram-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .totto-images {
+    grid-template-columns: 1fr;
+  }
+
+  .totto-info {
+    padding: 3rem 1.5rem;
+  }
+
+  .phone-cta {
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+
+  .phone-cta-number {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="images/logo_sotto_white.png" alt="Sotto" class="logo-white">
+    <img src="images/logo_sotto_Gold.png" alt="Sotto" class="logo-dark">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#shopinfo">Shop Info</a></li>
+    <li><a href="#onlineshop">Online Shop</a></li>
+    <li><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener" class="nav-ig">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#philosophy" class="mobile-link">Philosophy</a>
+  <a href="#menu" class="mobile-link">Menu</a>
+  <a href="#story" class="mobile-link">Story</a>
+  <a href="#shopinfo" class="mobile-link">Shop Info</a>
+  <a href="#onlineshop" class="mobile-link">Online Shop</a>
+  <a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <img src="images/Tiramisu_01.jpg" alt="Sotto Tiramisù" class="hero-img">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="images/logo_sotto_Gold.png" alt="Sotto" class="hero-logo">
+    <p class="hero-sub">Tiramisù &amp; Grocery</p>
+    <p class="hero-tagline">トレヴィーゾの記憶を、沖縄から一さじずつ。</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ========== PHILOSOPHY ========== -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-image fade-in-left">
+      <img src="images/Tiramisu_02.JPG" alt="ティラミス">
+    </div>
+    <div class="philosophy-text fade-in-right">
+      <p class="section-label">Philosophy</p>
+      <h2 class="section-title-en">Philosophy</h2>
+      <p class="section-title-ja">わたしたちのこだわり</p>
+      <p class="philosophy-subtitle">Authentic Recipe from Treviso</p>
+      <div class="philosophy-body">
+        <p>材料は、マスカルポーネ、卵黄、きび砂糖、少量のマルサラ酒。それだけです。生クリームもメレンゲも加えない——ティラミス発祥の地トレヴィーゾで受け継がれてきた、正統な製法だけを守っています。</p>
+        <p>日本で一般的なティラミスとは、口に含んだ瞬間に違いがわかります。甘すぎず、苦すぎず、アルコールも効きすぎない。すべてがちょうどいいバランスで重なり合う、大人のための一皿です。</p>
+        <p>サヴォイアルディ（フィンガービスケット）も一本一本手作り。初日はなめらかでクリーミーな食感を、翌日はビスキュイがしっとりと馴染んだ深い味わいを——一つのティラミスで、二つの表情をお楽しみいただけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Philosophy Features -->
+<section class="philosophy-features">
+  <div class="philosophy-features-inner">
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Mascarpone</h3>
+      <p class="feature-item-desc">イタリアから毎週空輸</p>
+    </div>
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Method</h3>
+      <p class="feature-item-desc">生クリーム・メレンゲ不使用</p>
+    </div>
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Savoiardi</h3>
+      <p class="feature-item-desc">ビスケットまで全て手作り</p>
+    </div>
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Cocoa</h3>
+      <p class="feature-item-desc">注文ごとにかけたて</p>
+    </div>
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Adjust</h3>
+      <p class="feature-item-desc">届く素材の状態で毎回微調整</p>
+    </div>
+    <div class="feature-item fade-in">
+      <h3 class="feature-item-title">Two Days</h3>
+      <p class="feature-item-desc">初日と翌日、二つの味わい</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MENU ========== -->
+<section class="menu-section" id="menu">
+  <div class="menu-header fade-in">
+    <p class="section-label">Menu</p>
+    <h2 class="section-title-en">Menu</h2>
+    <p class="section-title-ja">メニュー</p>
+  </div>
+
+  <!-- Item 1 -->
+  <div class="menu-item">
+    <div class="menu-item-image fade-in-left">
+      <img src="images/Tiramisu_02.JPG" alt="ホールティラミス">
+    </div>
+    <div class="menu-item-info fade-in-right">
+      <div>
+        <h3 class="menu-item-name-ja">ホールティラミス</h3>
+        <p class="menu-item-name-en">Tiramisù Intero</p>
+        <p class="menu-item-price">&yen;3,900<span style="font-size:0.7rem; color:var(--mid-gray);">（税込）</span></p>
+        <p class="menu-item-desc">直径約14cm、高さ5cm。4〜5人でお楽しみいただけるサイズです。毎週イタリアから届くマスカルポーネを贅沢に使い、届いたその日の状態に合わせてレシピを微調整。かつて予約開始1分で完売した、Sottoの看板商品です。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="menu-item">
+    <div class="menu-item-image fade-in-left">
+      <img src="images/MiniTiramisu_01.jpg" alt="ミニティラミスカップ">
+    </div>
+    <div class="menu-item-info fade-in-right">
+      <div>
+        <h3 class="menu-item-name-ja">ミニティラミスカップ</h3>
+        <p class="menu-item-name-en">Tiramisù in Coppa</p>
+        <p class="menu-item-price">&yen;750<span style="font-size:0.7rem; color:var(--mid-gray);">（税込 / 1個）</span></p>
+        <p class="menu-item-desc">おひとりさまサイズのティラミス。ホールと同じ本場の製法で、手土産やちょっとした自分へのご褒美に。3個入りセットもご用意しています。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 3 -->
+  <div class="menu-item">
+    <div class="menu-item-image fade-in-left">
+      <img src="images/drink_01.jpg" alt="手作り酵素ドリンク">
+    </div>
+    <div class="menu-item-info fade-in-right">
+      <div>
+        <h3 class="menu-item-name-ja">手作り酵素ドリンク</h3>
+        <p class="menu-item-name-en">Enzyme Drink</p>
+        <p class="menu-item-price">&yen;500–600<span style="font-size:0.7rem; color:var(--mid-gray);">（税込）</span></p>
+        <p class="menu-item-desc">季節のフルーツから手作りした自家製酵素シロップのドリンク。ティラミスとの相性も抜群です。アイス・ホットからお選びいただけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STORY ========== -->
+<section class="story-section" id="story">
+  <div class="story-header fade-in">
+    <p class="section-label">Story</p>
+    <h2 class="section-title-en">Story</h2>
+    <p class="section-title-ja">わたしたちの物語</p>
+  </div>
+
+  <!-- Satoshi -->
+  <div class="story-person fade-in-slow">
+    <div class="story-person-image-wrap">
+      <img src="images/Satoshi_Shiohira_Profile_02.jpg" alt="塩平 智">
+    </div>
+    <div class="story-person-text-box">
+      <p class="story-person-role">Chef / Owner</p>
+      <h3 class="story-person-name-en">Satoshi Shiohira</h3>
+      <p class="story-person-name-ja">塩平 智</p>
+      <p class="story-person-body">1984年うるま市生まれ。沖縄の調理師専門学校を経て、東京・目黒の「La Bettola da Ochiai（ラ・ベットラ・ダ・オチアイ）」で4年間修業。その後イタリアへ渡り、トレヴィーゾ近郊で約2年間、現地のリストランテやトラットリアで研鑽を積む。帰国後は東京・中目黒のイタリアン「ARDOR」にてシェフを務めた。<br><br>2021年、妻・千尋とともに沖縄へ戻り、テイクアウト専門のティラミス店「Sotto」を開業。トレヴィーゾの伝統製法を守りながら、素材と向き合い、届いたその日のマスカルポーネの状態に合わせて毎回レシピを微調整する——それが智の作るティラミスです。<br><br>2022年にはSottoの隣にリストランテ「Totto」をオープン。イタリアで出合った味と空気感を、沖縄の食材とともに表現している。日々キッチンに立ちながら、「0.1ミリ単位で味を合わせる」という姿勢を貫くのがSottoです。</p>
+      <div class="story-timeline">
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">La Bettola</p>
+          <p class="timeline-dot-label">目黒</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">Italy</p>
+          <p class="timeline-dot-label">トレヴィーゾ</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">ARDOR</p>
+          <p class="timeline-dot-label">中目黒</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">2021</p>
+          <p class="timeline-dot-label">Sotto開業</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">2022</p>
+          <p class="timeline-dot-label">Totto開業</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chihiro -->
+  <div class="story-person fade-in-slow">
+    <div class="story-person-image-wrap" style="margin-left:auto;">
+      <img src="images/Owner_ChihiroShiohira_01.jpg" alt="塩平 千尋">
+    </div>
+    <div class="story-person-text-box" style="left:0; right:auto;">
+      <p class="story-person-role">Owner / Director</p>
+      <h3 class="story-person-name-en">Chihiro Shiohira</h3>
+      <p class="story-person-name-ja">塩平 千尋</p>
+      <p class="story-person-body">1984年那覇市生まれ。東京で映像制作やイベント運営に携わったのち、夫・智とともにイタリアへ。現地での暮らしを通じて、食を「文化ごと届ける」という考え方に共鳴する。<br><br>帰沖後の2021年、Sottoを共同で開業。ブランディング、デザイン、SNS、接客——店の「伝え方」すべてを担い、トレヴィーゾの記憶を沖縄の日常に届ける架け橋となっている。<br><br>Sottoの世界観を視覚的に表現するアートディレクションに加え、Instagram（@ciromedia）やThreadsでの情報発信も行い、「おいしい」の裏側にある物語を、言葉でも届けている。</p>
+      <div class="story-timeline">
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">Tokyo</p>
+          <p class="timeline-dot-label">映像制作</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">Italy</p>
+          <p class="timeline-dot-label">渡伊</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">2021</p>
+          <p class="timeline-dot-label">Sotto開業</p>
+        </div>
+        <div class="timeline-dot">
+          <p class="timeline-dot-year">ciromedia</p>
+          <p class="timeline-dot-label">情報発信</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MEDIA ========== -->
+<section class="media-section" id="media">
+  <div class="media-header fade-in">
+    <p class="section-label">Media</p>
+    <h2 class="section-title-en">Media</h2>
+    <p class="section-title-ja">メディア掲載</p>
+  </div>
+  <div class="media-grid">
+    <a href="https://lee.hpplus.jp/100nintai/2918996/" target="_blank" rel="noopener" class="media-card fade-in">
+      <h3 class="media-card-name">LEE</h3>
+      <p class="media-card-detail">集英社<br>2024年7月</p>
+    </a>
+    <a href="https://news.yahoo.co.jp/expert/articles/0e9a3d0eb1ade5c9479dd9a85e0e1b3e666a1c52" target="_blank" rel="noopener" class="media-card fade-in">
+      <h3 class="media-card-name">Yahoo!ニュース</h3>
+      <p class="media-card-detail">専門ライター記事<br>2024年12月</p>
+    </a>
+    <a href="https://goetheweb.jp/gourmet/article/20240820-totto" target="_blank" rel="noopener" class="media-card fade-in">
+      <h3 class="media-card-name">GOETHE</h3>
+      <p class="media-card-detail">幻冬舎<br>2024年9月号</p>
+    </a>
+    <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener" class="media-card fade-in">
+      <h3 class="media-card-name">食べログ</h3>
+      <p class="media-card-detail">保存数350件超</p>
+    </a>
+    <a href="https://google.com/maps/search/Sotto+宜野湾市嘉数4-6-7" target="_blank" rel="noopener" class="media-card fade-in">
+      <h3 class="media-card-name">Google Maps</h3>
+      <p class="media-card-detail">★4.3 / 5.0</p>
+    </a>
+  </div>
+</section>
+
+<!-- ========== VOICES ========== -->
+<section class="voices-section" id="voices">
+  <div class="voices-header fade-in">
+    <p class="section-label">Voices</p>
+    <h2 class="section-title-en">Voices</h2>
+    <p class="section-title-ja">お客さまの声</p>
+  </div>
+  <div class="voices-grid">
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">マスカルポーネの風味が驚くほど濃厚で、でも甘すぎない。生クリーム不使用と聞いて納得。日本のティラミスの概念が覆りました。</p>
+      <p class="voice-card-source"><a href="https://google.com/maps/search/Sotto+宜野湾市嘉数4-6-7" target="_blank" rel="noopener">Google Maps</a></p>
+    </div>
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">初日のなめらかさと、翌日のしっとり感が全く別物。二日楽しめるティラミスは初めてです。</p>
+      <p class="voice-card-source"><a href="https://google.com/maps/search/Sotto+宜野湾市嘉数4-6-7" target="_blank" rel="noopener">Google Maps</a></p>
+    </div>
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">ビスケットが手作りと知って驚きました。サクッとした食感がクリームと絶妙に合います。手土産にしたら大好評でした。</p>
+      <p class="voice-card-source"><a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener">食べログ</a></p>
+    </div>
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">沖縄旅行のたびに必ず立ち寄ります。以前は予約開始1分で売り切れていたほどの人気店。今は買いやすくなりましたが、味は相変わらず絶品です。</p>
+      <p class="voice-card-source"><a href="https://google.com/maps/search/Sotto+宜野湾市嘉数4-6-7" target="_blank" rel="noopener">Google Maps</a></p>
+    </div>
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">酵素ドリンクとのペアリングが最高。フルーティーな酸味がティラミスの濃厚さを引き立ててくれます。</p>
+      <p class="voice-card-source"><a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener">食べログ</a></p>
+    </div>
+    <div class="voice-card fade-in">
+      <p class="voice-card-stars">★★★★★</p>
+      <p class="voice-card-text">イタリアで食べたティラミスの味がする。本場の味を沖縄で出会えるなんて感動しました。ココアの香りが最高です。</p>
+      <p class="voice-card-source"><a href="https://google.com/maps/search/Sotto+宜野湾市嘉数4-6-7" target="_blank" rel="noopener">Google Maps</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SHOP INFO ========== -->
+<section class="shopinfo-section" id="shopinfo">
+  <div class="shopinfo-header fade-in">
+    <p class="section-label">Information</p>
+    <h2 class="section-title-en">Shop Info</h2>
+    <p class="section-title-ja">店舗情報</p>
+  </div>
+  <div class="shopinfo-content">
+    <div class="fade-in-left">
+      <div class="shopinfo-table">
+        <dl>
+          <dt>住所</dt>
+          <dd>〒901-2226<br>沖縄県宜野湾市嘉数4-6-7</dd>
+          <dt>営業時間</dt>
+          <dd>月火 11:00–18:00<br>水〜日 11:00–16:00</dd>
+          <dt>形態</dt>
+          <dd>テイクアウト専門</dd>
+          <dt>駐車場</dt>
+          <dd>8台</dd>
+          <dt>電話</dt>
+          <dd><a href="tel:098-880-2919" style="text-decoration:underline; text-underline-offset:3px;">098-880-2919</a></dd>
+        </dl>
+      </div>
+      <div class="shopinfo-note">
+        ※ ティラミスはテイクアウト商品です。保冷バッグのご持参をおすすめします（保冷バッグは店頭でも販売しています）。<br>
+        ※ イタリア食材や調味料などのグロッサリーも店頭で取り扱っています。
+      </div>
+    </div>
+    <div class="shopinfo-map fade-in-right">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.8!2d127.75!3d26.33!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5rKW57iE55yM5a6c6YeO5rm-5biC5Ziy5pWwNC02LTc!5e0!3m2!1sja!2sjp!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <!-- Phone CTA -->
+  <div class="phone-cta fade-in">
+    <p class="phone-cta-label">Telephone</p>
+    <p class="phone-cta-number"><a href="tel:098-880-2919">098-880-2919</a></p>
+    <p class="phone-cta-note">営業時間内にお電話ください。取り置き・ご質問など、お気軽にどうぞ。</p>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-section" id="faq">
+  <div class="faq-header fade-in">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title-en">FAQ</h2>
+    <p class="section-title-ja">よくあるご質問</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>予約は必要ですか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">予約なしでもご購入いただけますが、確実にお求めいただくにはお電話での取り置きをおすすめします。特にホールティラミスは数量限定のため、売り切れとなる場合がございます。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>賞味期限はどのくらいですか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">冷蔵で3日間です。初日はなめらかでクリーミーな食感、翌日はビスキュイがしっとり馴染んだ深い味わいと、日ごとに異なる表情をお楽しみいただけます。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>配送はしていますか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">オンラインショップにて冷凍配送を承っております。店頭商品とは仕様が異なりますが、本場の味をそのままお届けできるよう工夫しています。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>アレルギー対応はありますか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">ティラミスには卵・乳製品・小麦・微量のアルコール（マルサラ酒）が含まれます。アレルギーをお持ちの方は事前にご相談ください。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>子どもでも食べられますか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">少量のマルサラ酒（酒精強化ワイン）を使用しています。アルコール分はごく微量ですが、小さなお子さまには念のためご注意ください。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>駐車場はありますか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">店舗前に8台分の駐車スペースがございます。</div>
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <div class="faq-question">
+        <span>イートインはできますか？</span>
+        <span class="faq-question-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Sottoはテイクアウト専門店です。お食事をご希望の方は、隣接するリストランテ「Totto」をご利用ください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ONLINE SHOP ========== -->
+<section class="onlineshop-section" id="onlineshop">
+  <div class="fade-in">
+    <p class="section-label">Online Shop</p>
+    <h2 class="section-title-en">Online Shop</h2>
+    <p class="section-title-ja">オンラインショップ</p>
+    <p class="onlineshop-text">Sottoのティラミスを、全国へ冷凍配送でお届けします。<br>ご自宅用にも、大切な方への贈り物にも。</p>
+    <a href="https://sotto-okinawa-2021.stores.jp/" target="_blank" rel="noopener" class="onlineshop-btn">Visit Shop</a>
+  </div>
+</section>
+
+<!-- ========== INSTAGRAM ========== -->
+<section class="instagram-section" id="instagram">
+  <div class="instagram-header fade-in">
+    <p class="section-label">Instagram</p>
+    <h2 class="section-title-en">Instagram</h2>
+    <p class="section-title-ja">@tiramisu_sotto_okinawa</p>
+  </div>
+  <div class="instagram-grid">
+    <div class="ig-embed-wrap fade-in">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DFpVLsNTjfe/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:200px; padding:0; width:100%;"></blockquote>
+    </div>
+    <div class="ig-embed-wrap fade-in">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DFUfEfeTwU9/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:200px; padding:0; width:100%;"></blockquote>
+    </div>
+    <div class="ig-embed-wrap fade-in">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DExjKGSTzGu/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:200px; padding:0; width:100%;"></blockquote>
+    </div>
+    <div class="ig-embed-wrap fade-in">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DEng3W_z2a0/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:200px; padding:0; width:100%;"></blockquote>
+    </div>
+    <div class="ig-embed-wrap fade-in">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DEiL9bgTQ3i/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:200px; padding:0; width:100%;"></blockquote>
+    </div>
+  </div>
+  <div class="instagram-follow fade-in">
+    <a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener">Follow @tiramisu_sotto_okinawa</a>
+  </div>
+</section>
+
+<!-- ========== SISTER SHOP: TOTTO ========== -->
+<section class="totto-section" id="totto">
+  <div class="totto-inner">
+    <div class="totto-images fade-in-left">
+      <img src="images/Totto_01.jpg" alt="Totto">
+      <img src="images/Totto_02.jpg" alt="Totto">
+    </div>
+    <div class="totto-info fade-in-right">
+      <img src="images/totto_logo.PNG" alt="Totto" class="totto-logo">
+      <p class="totto-label">Sister Shop</p>
+      <h3 class="totto-name">Totto</h3>
+      <p class="totto-name-ja">リストランテ・トット</p>
+      <p class="totto-desc">Sottoの隣に佇むリストランテ。シェフ・塩平智がイタリアで出合った味と空気感を、沖縄の食材とともにコースで表現します。完全予約制、カウンター席のみの小さなレストランです。</p>
+      <p class="totto-award">ゴエミヨ 2025 掲載</p>
+      <p class="totto-price">&yen;22,000（税込）〜</p>
+      <div class="totto-buttons">
+        <a href="https://www.tablecheck.com/shops/totto/reserve" target="_blank" rel="noopener" class="totto-btn">Reserve</a>
+        <a href="https://www.instagram.com/totto_okinawa/" target="_blank" rel="noopener" class="totto-btn">Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <img src="images/logo_sotto_white.png" alt="Sotto" class="footer-logo" style="filter:invert(0.7);">
+  <div class="footer-icons">
+    <a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://www.threads.net/@tiramisu_sotto_okinawa" target="_blank" rel="noopener" aria-label="Threads">
+      <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.343-.783-.958-1.424-1.78-1.86-.496 2.768-1.588 4.736-3.265 5.855-1.328.886-2.987 1.17-4.453.759-1.632-.458-2.892-1.588-3.455-3.1-.4-1.073-.39-2.22.027-3.236.67-1.63 2.21-2.703 4.126-2.878.93-.085 1.852-.048 2.741.107.054-.68.072-1.39.046-2.118l2.1-.058c.04 1.006.01 1.98-.088 2.906 1.146.378 2.114.96 2.864 1.726 1.038 1.06 1.628 2.426 1.738 4.03.084 1.207-.18 2.385-.782 3.404-1.334 2.258-3.77 3.448-7.242 3.545h-.01c-.057.002-.114.002-.17.002zm-1.556-8.05c-1.18.108-2.07.675-2.428 1.542-.224.545-.227 1.147-.009 1.728.345.928 1.165 1.59 2.203 1.882 1.074.301 2.294.098 3.265-.543 1.266-.836 2.13-2.376 2.555-4.563-.66-.144-1.357-.233-2.082-.266-.505-.023-1.01-.01-1.504.03v.19z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">&copy; 2025 Sotto — Tiramisù &amp; Grocery</p>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+
+  function handleNavScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }
+
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-menu a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Hero loaded animation
+  window.addEventListener('load', function() {
+    document.querySelector('.hero').classList.add('loaded');
+  });
+
+  // IntersectionObserver for fade-in
+  const fadeElements = document.querySelectorAll('.fade-in, .fade-in-slow, .fade-in-left, .fade-in-right');
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  fadeElements.forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(function(question) {
+    question.addEventListener('click', function() {
+      const item = this.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const inner = answer.querySelector('.faq-answer-inner');
+
+      // Close other open items
+      document.querySelectorAll('.faq-item.active').forEach(function(openItem) {
+        if (openItem !== item) {
+          openItem.classList.remove('active');
+          openItem.querySelector('.faq-answer').style.maxHeight = '0';
+        }
+      });
+
+      // Toggle current
+      item.classList.toggle('active');
+      if (item.classList.contains('active')) {
+        answer.style.maxHeight = inner.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = '0';
+      }
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Parallax effect on hero image
+  window.addEventListener('scroll', function() {
+    const hero = document.querySelector('.hero');
+    const heroImg = document.querySelector('.hero-img');
+    if (!hero || !heroImg) return;
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom > 0) {
+      const scrolled = window.scrollY;
+      heroImg.style.transform = 'scale(' + (1.05 - scrolled * 0.0001) + ') translateY(' + (scrolled * 0.3) + 'px)';
+    }
+  }, { passive: true });
+
+})();
+</script>
+
+</body>
+</html>

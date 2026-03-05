@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sotto HP デザイン提案書</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark: #1a1a1a;
+      --gray: #666;
+      --light-gray: #e8e8e8;
+      --bg: #f9f9f9;
+      --white: #fff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      color: var(--dark);
+      background: var(--bg);
+      line-height: 1.8;
+    }
+
+    /* ===== Cover Slide ===== */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .cover-logo {
+      width: 180px;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+    }
+
+    .cover h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .cover p {
+      font-size: 0.95rem;
+      color: #aaa;
+      letter-spacing: 0.05em;
+    }
+
+    .cover-date {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .cover-scroll {
+      margin-top: 4rem;
+      font-size: 0.7rem;
+      color: #555;
+      letter-spacing: 0.15em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ===== Slide Common ===== */
+    .slide {
+      min-height: 100vh;
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .slide-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      color: #bbb;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .slide h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide h2 span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-left: 1rem;
+      font-weight: 300;
+    }
+
+    .slide-divider {
+      width: 40px;
+      height: 1px;
+      background: #ccc;
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* ===== Overview Slide ===== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .overview-card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .overview-card-color {
+      height: 8px;
+    }
+
+    .overview-card-body {
+      padding: 2rem;
+    }
+
+    .overview-card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .overview-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .overview-card .subtitle {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+    }
+
+    .overview-card p {
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.9;
+    }
+
+    /* ===== Design Detail Slide ===== */
+    .design-slide {
+      min-height: 100vh;
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .design-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .design-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      letter-spacing: 0.1em;
+    }
+
+    .design-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .design-concept {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .design-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .design-preview {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .design-preview img {
+      width: 100%;
+      display: block;
+    }
+
+    .design-preview iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    .design-preview-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .design-info h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .design-spec {
+      margin-bottom: 2rem;
+    }
+
+    .design-spec-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .color-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .color-chip {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .color-chip-label {
+      font-size: 0.7rem;
+      color: #999;
+      text-align: center;
+      margin-top: 0.2rem;
+    }
+
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .keyword {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #555;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      font-size: 0.82rem;
+      color: #555;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .feature-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ccc;
+      transform: translateY(-50%);
+    }
+
+    .btn-preview {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.7rem 2rem;
+      border: 1px solid var(--dark);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-preview:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* ===== Comparison Table ===== */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.82rem;
+    }
+
+    .comparison-table th {
+      text-align: left;
+      padding: 1rem;
+      font-weight: 500;
+      border-bottom: 2px solid var(--dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+
+    .comparison-table td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+      color: #555;
+    }
+
+    .comparison-table tr:hover td {
+      background: #fafafa;
+    }
+
+    .comparison-table .row-label {
+      font-weight: 400;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    /* ===== Target Slide ===== */
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .target-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+
+    .target-card h4 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .target-card p {
+      font-size: 0.78rem;
+      color: #777;
+      line-height: 1.8;
+    }
+
+    /* ===== Footer ===== */
+    .pres-footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #bbb;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .overview-grid,
+      .target-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .design-content {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-table {
+        font-size: 0.72rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.6rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover -->
+  <section class="cover">
+    <img src="images/logo_sotto_white.png" alt="Sotto" class="cover-logo">
+    <h1>HP Design Proposal</h1>
+    <p>Sotto - Tiramisù & Grocery 公式ホームページ デザイン提案書</p>
+    <div class="cover-date">2026.03</div>
+    <div class="cover-scroll">SCROLL</div>
+  </section>
+
+  <!-- Slide 1: Overview -->
+  <section class="slide">
+    <div class="slide-number">01</div>
+    <h2>Design Overview <span>3案の概要</span></h2>
+    <div class="slide-divider"></div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-card-color" style="background: linear-gradient(90deg, #C4A76C, #8C7055);"></div>
+        <div class="overview-card-body">
+          <div class="overview-card-label">Base</div>
+          <h3>Classico</h3>
+          <div class="subtitle">クラシック × イタリアン</div>
+          <p>温かみのあるクリーム×ココアブラウンを基調に、Sottoの世界観を正統派で表現。ティラミスのテクスチャをヘッダーに用い、上品なゴールドアクセントで本物感を演出するベース案。</p>
+        </div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-color" style="background: linear-gradient(90deg, #e0e0e0, #1a1a1a);"></div>
+        <div class="overview-card-body">
+          <div class="overview-card-label">Plan A</div>
+          <h3>Bianco</h3>
+          <div class="subtitle">ミニマル × ギャラリー</div>
+          <p>純白の余白が主役。美術館のような静謐な空間で、写真一枚一枚を大きく見せるフォトエッセイ形式。引き算のデザインでティラミスの素材感を際立たせる。</p>
+        </div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-color" style="background: linear-gradient(90deg, #C4704B, #6B7F5E);"></div>
+        <div class="overview-card-body">
+          <div class="overview-card-label">Plan B</div>
+          <h3>Terra</h3>
+          <div class="subtitle">クラフト × オーガニック</div>
+          <p>和紙のようなテクスチャとテラコッタ×オリーブの配色。ポラロイド風の写真配置や手づくり感のあるラベルで、イタリアの田舎の市場のような温かさと親しみやすさを表現。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Base - Classico -->
+  <div class="design-slide">
+    <div class="slide-number">02</div>
+    <div class="design-header">
+      <h2>Classico</h2>
+      <span class="design-tag" style="background: #8C7055;">BASE</span>
+    </div>
+    <p class="design-concept">クラシック × イタリアン ── 温かみと本物感の正統派デザイン</p>
+    <div class="slide-divider"></div>
+    <div class="design-content">
+      <div class="design-preview">
+        <iframe src="index.html" title="Base Design Preview"></iframe>
+        <div class="design-preview-overlay">index.html</div>
+      </div>
+      <div class="design-info">
+        <div class="design-spec">
+          <div class="design-spec-title">Color Palette</div>
+          <div class="color-row">
+            <div><div class="color-chip" style="background: #F5F0E8;"></div><div class="color-chip-label">Cream</div></div>
+            <div><div class="color-chip" style="background: #3C2A1A;"></div><div class="color-chip-label">Brown</div></div>
+            <div><div class="color-chip" style="background: #C4A76C;"></div><div class="color-chip-label">Gold</div></div>
+            <div><div class="color-chip" style="background: #8C7055;"></div><div class="color-chip-label">Mid</div></div>
+            <div><div class="color-chip" style="background: #FFFCF7;"></div><div class="color-chip-label">BG</div></div>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Keywords</div>
+          <div class="keyword-list">
+            <span class="keyword">本物感</span>
+            <span class="keyword">温かみ</span>
+            <span class="keyword">クラシック</span>
+            <span class="keyword">ガストロノミー</span>
+            <span class="keyword">上品</span>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Design Features</div>
+          <ul class="feature-list">
+            <li>ココアテクスチャのヘッダーバナー</li>
+            <li>ゴールド箔押し風のロゴ演出</li>
+            <li>温かみのあるクリーム×ブラウン配色</li>
+            <li>カード型メニューレイアウト</li>
+            <li>セリフ体見出し×サンセリフ本文</li>
+            <li>スクロールフェードインアニメーション</li>
+          </ul>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Best For</div>
+          <p style="font-size:0.82rem; color:#555;">Sottoのブランドイメージに最も忠実。イタリアの伝統と沖縄の温かさを両立した安定感のあるデザイン。幅広い年齢層に受け入れられやすい。</p>
+        </div>
+        <a href="index.html" target="_blank" class="btn-preview">プレビューを開く</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Plan A - Bianco -->
+  <div class="design-slide">
+    <div class="slide-number">03</div>
+    <div class="design-header">
+      <h2>Bianco</h2>
+      <span class="design-tag" style="background: #1a1a1a;">PLAN A</span>
+    </div>
+    <p class="design-concept">ミニマル × ギャラリー ── 白の余白が引き立てる、写真と素材の力</p>
+    <div class="slide-divider"></div>
+    <div class="design-content">
+      <div class="design-preview">
+        <iframe src="design_a_bianco.html" title="Plan A Preview"></iframe>
+        <div class="design-preview-overlay">design_a_bianco.html</div>
+      </div>
+      <div class="design-info">
+        <div class="design-spec">
+          <div class="design-spec-title">Color Palette</div>
+          <div class="color-row">
+            <div><div class="color-chip" style="background: #ffffff; border: 1px solid #ddd;"></div><div class="color-chip-label">White</div></div>
+            <div><div class="color-chip" style="background: #f5f5f5;"></div><div class="color-chip-label">Gray</div></div>
+            <div><div class="color-chip" style="background: #1a1a1a;"></div><div class="color-chip-label">Black</div></div>
+            <div><div class="color-chip" style="background: #999;"></div><div class="color-chip-label">Warm</div></div>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Keywords</div>
+          <div class="keyword-list">
+            <span class="keyword">洗練</span>
+            <span class="keyword">モダン</span>
+            <span class="keyword">静謐</span>
+            <span class="keyword">余白</span>
+            <span class="keyword">ギャラリー</span>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Design Features</div>
+          <ul class="feature-list">
+            <li>フルブリードの大きな写真表現</li>
+            <li>セクション間の大きな余白（8〜12rem）</li>
+            <li>極細セリフ体の繊細なタイポグラフィ</li>
+            <li>パララックススクロール効果</li>
+            <li>白×黒のモノトーン＋最小限のアクセント</li>
+            <li>フォトエッセイ風の1枚ずつ見せるレイアウト</li>
+          </ul>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Best For</div>
+          <p style="font-size:0.82rem; color:#555;">写真のクオリティを最大限に活かしたい場合に最適。高級感・ブランド力を重視するなら、このミニマルアプローチが最もインパクトがある。デザイン感度の高い層に刺さる。</p>
+        </div>
+        <a href="design_a_bianco.html" target="_blank" class="btn-preview">プレビューを開く</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Plan B - Terra -->
+  <div class="design-slide">
+    <div class="slide-number">04</div>
+    <div class="design-header">
+      <h2>Terra</h2>
+      <span class="design-tag" style="background: #C4704B;">PLAN B</span>
+    </div>
+    <p class="design-concept">クラフト × オーガニック ── 手づくりの温もりと大地の色彩</p>
+    <div class="slide-divider"></div>
+    <div class="design-content">
+      <div class="design-preview">
+        <iframe src="design_b_terra.html" title="Plan B Preview"></iframe>
+        <div class="design-preview-overlay">design_b_terra.html</div>
+      </div>
+      <div class="design-info">
+        <div class="design-spec">
+          <div class="design-spec-title">Color Palette</div>
+          <div class="color-row">
+            <div><div class="color-chip" style="background: #E8DFD0;"></div><div class="color-chip-label">Sand</div></div>
+            <div><div class="color-chip" style="background: #C4704B;"></div><div class="color-chip-label">Terra</div></div>
+            <div><div class="color-chip" style="background: #6B7F5E;"></div><div class="color-chip-label">Olive</div></div>
+            <div><div class="color-chip" style="background: #3C2A1A;"></div><div class="color-chip-label">Brown</div></div>
+            <div><div class="color-chip" style="background: #FAF5EE;"></div><div class="color-chip-label">BG</div></div>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Keywords</div>
+          <div class="keyword-list">
+            <span class="keyword">手づくり</span>
+            <span class="keyword">温かみ</span>
+            <span class="keyword">親しみ</span>
+            <span class="keyword">オーガニック</span>
+            <span class="keyword">マーケット</span>
+          </div>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Design Features</div>
+          <ul class="feature-list">
+            <li>和紙風テクスチャの背景</li>
+            <li>ポラロイド風の写真フレーム</li>
+            <li>テラコッタ×オリーブの温かい配色</li>
+            <li>手書き風ボーダー・ラベル装飾</li>
+            <li>カードが傾いた有機的なレイアウト</li>
+            <li>角丸ピル型ボタンの親しみやすいUI</li>
+          </ul>
+        </div>
+        <div class="design-spec">
+          <div class="design-spec-title">Best For</div>
+          <p style="font-size:0.82rem; color:#555;">Sottoの「手づくり」「素材を大切にする」姿勢を視覚的に体現。親しみやすくカジュアルな印象で、来店のハードルを下げる効果がある。ファミリー層やSNS世代にも好印象。</p>
+        </div>
+        <a href="design_b_terra.html" target="_blank" class="btn-preview">プレビューを開く</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Comparison -->
+  <section class="slide">
+    <div class="slide-number">05</div>
+    <h2>Comparison <span>3案比較表</span></h2>
+    <div class="slide-divider"></div>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th style="width:15%;">項目</th>
+          <th style="width:28%;">Base ── Classico</th>
+          <th style="width:28%;">Plan A ── Bianco</th>
+          <th style="width:28%;">Plan B ── Terra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">コンセプト</td>
+          <td>クラシック × イタリアン</td>
+          <td>ミニマル × ギャラリー</td>
+          <td>クラフト × オーガニック</td>
+        </tr>
+        <tr>
+          <td class="row-label">トーン</td>
+          <td>温かく上品</td>
+          <td>静かで洗練</td>
+          <td>親しみやすく有機的</td>
+        </tr>
+        <tr>
+          <td class="row-label">配色</td>
+          <td>クリーム / ブラウン / ゴールド</td>
+          <td>ホワイト / ブラック / グレー</td>
+          <td>サンド / テラコッタ / オリーブ</td>
+        </tr>
+        <tr>
+          <td class="row-label">写真の見せ方</td>
+          <td>カード型で整然と配置</td>
+          <td>フルブリードで大胆に1枚ずつ</td>
+          <td>ポラロイド風・散らばり配置</td>
+        </tr>
+        <tr>
+          <td class="row-label">タイポグラフィ</td>
+          <td>セリフ見出し＋サンセリフ本文</td>
+          <td>極細セリフで統一、最小限のテキスト</td>
+          <td>和風セリフ見出し＋柔らかいサンセリフ</td>
+        </tr>
+        <tr>
+          <td class="row-label">余白感</td>
+          <td>適度な余白</td>
+          <td>大胆な余白（主役）</td>
+          <td>有機的な詰まり感</td>
+        </tr>
+        <tr>
+          <td class="row-label">アニメーション</td>
+          <td>フェードイン</td>
+          <td>パララックス＋スロー フェードイン</td>
+          <td>フェードイン＋フロート</td>
+        </tr>
+        <tr>
+          <td class="row-label">印象</td>
+          <td>安定感 / 信頼 / 伝統</td>
+          <td>高級感 / モダン / アート</td>
+          <td>温かさ / 手触り / カジュアル</td>
+        </tr>
+        <tr>
+          <td class="row-label">相性の良い層</td>
+          <td>全年齢・汎用性が高い</td>
+          <td>デザイン感度の高い層</td>
+          <td>ファミリー・SNS世代</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 6: Recommendation -->
+  <section class="slide">
+    <div class="slide-number">06</div>
+    <h2>Recommendation <span>ご提案</span></h2>
+    <div class="slide-divider"></div>
+    <div class="target-grid">
+      <div class="target-card">
+        <h4 style="color:#8C7055;">Classico を選ぶなら</h4>
+        <p>Sottoの世界観を正統派で伝えたい。イタリアの伝統と職人の姿勢を、温かみのある王道デザインで表現。迷ったときの最も安定した選択肢。</p>
+      </div>
+      <div class="target-card">
+        <h4 style="color:#1a1a1a;">Bianco を選ぶなら</h4>
+        <p>写真と余白の力で「他のどの店とも違う」印象を残したい。ブランド価値を高め、プレミアムな存在感を打ち出す攻めのデザイン。</p>
+      </div>
+      <div class="target-card">
+        <h4 style="color:#C4704B;">Terra を選ぶなら</h4>
+        <p>手づくりの温もりと親しみやすさを前面に。「行ってみたい」「買ってみたい」と感じさせる、来店動線に最も強いデザイン。</p>
+      </div>
+    </div>
+    <p style="margin-top: 3rem; text-align: center; font-size: 0.85rem; color: var(--gray);">
+      各案の要素を組み合わせたハイブリッド案も対応可能です。<br>お気に入りの方向性をお聞かせください。
+    </p>
+  </section>
+
+  <div class="pres-footer">
+    Sotto HP Design Proposal &mdash; 2026.03
+  </div>
+
+</body>
+</html>
