@@ -51,6 +51,7 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
+      scroll-padding-top: 80px;
     }
 
     body {
@@ -114,6 +115,8 @@
       background-blend-mode: normal, normal, normal, normal, normal, normal, normal, normal, overlay;
       box-shadow: 0 2px 8px rgba(30, 15, 5, 0.3);
       transition: box-shadow 0.4s ease;
+      border-bottom: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, #C4A76C 20%, #E8D5A3 40%, #C4A76C 50%, #E8D5A3 60%, #C4A76C 80%, transparent 100%) 1;
     }
 
     .nav.scrolled {
@@ -166,7 +169,8 @@
       transition: width 0.3s;
     }
 
-    .nav-links a:hover::after {
+    .nav-links a:hover::after,
+    .nav-links a[style*="color"]::after {
       width: 100%;
     }
 
@@ -1066,6 +1070,8 @@
       color: var(--cream);
       padding: 3rem 2rem;
       text-align: center;
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, #C4A76C 20%, #E8D5A3 40%, #C4A76C 50%, #E8D5A3 60%, #C4A76C 80%, transparent 100%) 1;
     }
 
     .footer-logo {
@@ -1145,6 +1151,15 @@
 
       .nav-links a {
         font-size: 1.1rem;
+        color: var(--brown-dark);
+      }
+
+      .nav-links a:hover {
+        color: var(--brown-mid);
+      }
+
+      .philosophy-features {
+        grid-template-columns: 1fr 1fr;
       }
 
       .nav-hamburger {
@@ -1196,6 +1211,64 @@
         max-width: 300px;
       }
     }
+    /* ========== Scroll to Top ========== */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--brown-dark);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(30, 15, 5, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+      z-index: 90;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: var(--brown-mid);
+    }
+
+    /* ========== Instagram Fallback ========== */
+    .ig-post-fallback {
+      display: none;
+      width: 100%;
+      height: 300px;
+      background: rgba(255, 252, 247, 0.05);
+      border-radius: 4px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--warm-gray);
+      font-size: 0.85rem;
+    }
+
+    .ig-post-fallback a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .ig-post.ig-failed .ig-post-fallback {
+      display: flex;
+    }
+
+    .ig-post.ig-failed blockquote {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -1241,7 +1314,7 @@
         <div class="section-divider"></div>
       </div>
       <div class="philosophy-grid">
-        <img src="images/Tiramisu_01.jpg" alt="ティラミスの素材" class="philosophy-image fade-in">
+        <img src="images/Tiramisu_01.jpg" alt="ティラミスの素材" class="philosophy-image fade-in" loading="lazy">
         <div class="philosophy-text fade-in">
           <h3>Authentic Recipe from Treviso</h3>
           <p>
@@ -1299,7 +1372,7 @@
       <div class="menu-grid">
         <!-- Whole Tiramisu -->
         <div class="menu-card fade-in">
-          <img src="images/Tiramisu_02.JPG" alt="ホールティラミス" class="menu-card-image">
+          <img src="images/Tiramisu_02.JPG" alt="ホールティラミス" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">ホールティラミス</h3>
             <p class="menu-card-name-en">Tiramisù Intero</p>
@@ -1313,7 +1386,7 @@
         </div>
         <!-- Mini Cup -->
         <div class="menu-card fade-in">
-          <img src="images/MiniTiramisu_01.jpg" alt="ミニティラミスカップ" class="menu-card-image">
+          <img src="images/MiniTiramisu_01.jpg" alt="ミニティラミスカップ" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">ミニティラミスカップ</h3>
             <p class="menu-card-name-en">Tiramisù in Coppa</p>
@@ -1327,7 +1400,7 @@
         </div>
         <!-- Enzyme Drink -->
         <div class="menu-card fade-in">
-          <img src="images/drink_01.jpg" alt="手作り酵素ドリンク" class="menu-card-image">
+          <img src="images/drink_01.jpg" alt="手作り酵素ドリンク" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">手作り酵素ドリンク</h3>
             <p class="menu-card-name-en">Enzyme Drink</p>
@@ -1404,10 +1477,10 @@
             </div>
           </div>
         </div>
-        <img src="images/Satoshi_Shiohira_Profile_02.jpg" alt="潮平里志シェフ" class="story-image fade-in">
+        <img src="images/Satoshi_Shiohira_Profile_02.jpg" alt="潮平里志シェフ" class="story-image fade-in" loading="lazy">
       </div>
       <div class="story-grid story-grid-reverse" style="margin-top: 5rem;">
-        <img src="images/Owner_ChihiroShiohira_01.jpg" alt="潮平ちひろ" class="story-image fade-in">
+        <img src="images/Owner_ChihiroShiohira_01.jpg" alt="潮平ちひろ" class="story-image fade-in" loading="lazy">
         <div class="story-text fade-in">
           <h3>Chihiro Shiohira</h3>
           <p class="chef-name">潮平 ちひろ ── オーナー / ciromedia</p>
@@ -1569,7 +1642,7 @@
       </div>
       <div class="shopinfo-grid fade-in">
         <div class="shopinfo-details">
-          <img src="images/staff.jpg" alt="Sotto スタッフ" class="shopinfo-image">
+          <img src="images/staff.jpg" alt="Sotto スタッフ" class="shopinfo-image" loading="lazy">
           <table class="shopinfo-table">
             <tr>
               <th>Address</th>
@@ -1596,13 +1669,13 @@
             </tr>
             <tr>
               <th>Note</th>
-              <td>保冷バッグのご持参をおすすめします。<br>店内にはイタリアの蚤の市で集めたアンティーク雑貨、厳選されたイタリア食材やワイン、焼き菓子、オリジナルブレンドコーヒーなどグロサリーも取り揃えております。</td>
+              <td>保冷バッグのご持参をおすすめします。<br>店内にはイタリアの蚤の市で集めたアンティーク雑貨、厳選されたイタリア食材やワイン、焼き菓子、オリジナルブレンドコーヒーなどグロッサリーも取り揃えております。</td>
             </tr>
           </table>
         </div>
         <div class="shopinfo-map">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.4!2d127.7539!3d26.3319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e51b9f9c8f5555%3A0x1234567890abcdef!2z44K944OD44OI!5e0!3m2!1sja!2sjp!4v1700000000000"
+            src="https://www.google.com/maps?q=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7+Sotto&output=embed"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -1637,45 +1710,45 @@
       </div>
       <div class="faq-list fade-in">
         <div class="faq-item">
-          <button class="faq-question">予約は必要ですか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq1">予約は必要ですか？</button>
+          <div class="faq-answer" id="faq1" role="region">
             <div class="faq-answer-inner">予約なしでご購入いただけます。ただし、なくなり次第終了となりますので、確実に手に入れたい方はお電話（098-880-2919）での取り置きをおすすめします。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">保冷バッグは必要ですか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq2">保冷バッグは必要ですか？</button>
+          <div class="faq-answer" id="faq2" role="region">
             <div class="faq-answer-inner">はい、お持ちいただくことをおすすめします。ティラミスは生菓子のため、特に夏場は保冷バッグと保冷剤のご持参が安心です。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">賞味期限はどのくらいですか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq3">賞味期限はどのくらいですか？</button>
+          <div class="faq-answer" id="faq3" role="region">
             <div class="faq-answer-inner">冷蔵保存でお受け取り翌日までお召し上がりいただけます。初日はなめらかでクリーミーな食感、翌日はビスキュイがしっとり馴染んだ深い味わいと、一日ごとに異なる表情をお楽しみください。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">アレルギー成分を教えてください</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq4">アレルギー成分を教えてください</button>
+          <div class="faq-answer" id="faq4" role="region">
             <div class="faq-answer-inner">主な原材料は、マスカルポーネチーズ（乳）、卵黄（卵）、きび砂糖、マルサラ酒、小麦粉（サヴォイアルディ）です。乳・卵・小麦・アルコールを含みます。詳しくはお電話にてお問い合わせください。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">配送はできますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq5">配送はできますか？</button>
+          <div class="faq-answer" id="faq5" role="region">
             <div class="faq-answer-inner">はい、オンラインショップにて全国配送を承っております。瞬間冷凍でSottoの味をそのまま閉じ込め、冷凍便でお届けします。ご自宅用はもちろん、ギフトにもご利用いただけます。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">駐車場はありますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq6">駐車場はありますか？</button>
+          <div class="faq-answer" id="faq6" role="region">
             <div class="faq-answer-inner">はい、店舗前に8台分の駐車スペースがございます。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">イートインはできますか？</button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">申し訳ございません、テイクアウト専門となっております。店内ではティラミスのほか、厳選イタリア食材やワイン、焼き菓子、オリジナルブレンドコーヒーなどのグロサリーもお選びいただけます。</div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq7">イートインはできますか？</button>
+          <div class="faq-answer" id="faq7" role="region">
+            <div class="faq-answer-inner">申し訳ございません、テイクアウト専門となっております。店内ではティラミスのほか、厳選イタリア食材やワイン、焼き菓子、オリジナルブレンドコーヒーなどのグロッサリーもお選びいただけます。</div>
           </div>
         </div>
       </div>
@@ -1716,26 +1789,31 @@
             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DU601s_kqcy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
               <a href="https://www.instagram.com/p/DU601s_kqcy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagramで表示</a>
             </blockquote>
+            <div class="ig-post-fallback"><span>読み込みに失敗しました。<br><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener noreferrer">Instagramで見る</a></span></div>
           </div>
           <div class="ig-post">
             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DU1o9C_EoH-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
               <a href="https://www.instagram.com/reel/DU1o9C_EoH-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagramで表示</a>
             </blockquote>
+            <div class="ig-post-fallback"><span>読み込みに失敗しました。<br><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener noreferrer">Instagramで見る</a></span></div>
           </div>
           <div class="ig-post">
             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DU9mO1lknOd/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
               <a href="https://www.instagram.com/p/DU9mO1lknOd/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagramで表示</a>
             </blockquote>
+            <div class="ig-post-fallback"><span>読み込みに失敗しました。<br><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener noreferrer">Instagramで見る</a></span></div>
           </div>
           <div class="ig-post">
             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DUra841kmMD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
               <a href="https://www.instagram.com/p/DUra841kmMD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagramで表示</a>
             </blockquote>
+            <div class="ig-post-fallback"><span>読み込みに失敗しました。<br><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener noreferrer">Instagramで見る</a></span></div>
           </div>
           <div class="ig-post">
             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DUk1VdRkQkt/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
               <a href="https://www.instagram.com/reel/DUk1VdRkQkt/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagramで表示</a>
             </blockquote>
+            <div class="ig-post-fallback"><span>読み込みに失敗しました。<br><a href="https://www.instagram.com/tiramisu_sotto_okinawa/" target="_blank" rel="noopener noreferrer">Instagramで見る</a></span></div>
           </div>
         </div>
         <button class="instagram-nav next" aria-label="次へ">&#8250;</button>
@@ -1754,8 +1832,8 @@
     <div class="container">
       <div class="sister-inner">
         <div class="sister-images fade-in">
-          <img src="images/Totto_01.jpg" alt="Totto 店内">
-          <img src="images/Totto_02.jpg" alt="Totto 料理">
+          <img src="images/Totto_01.jpg" alt="Totto 店内" loading="lazy">
+          <img src="images/Totto_02.jpg" alt="Totto 料理" loading="lazy">
         </div>
         <div class="sister-text fade-in">
           <div class="sister-title-row">
@@ -1779,7 +1857,7 @@
             <a href="https://www.tablecheck.com/shops/totto-okinawa/reserve" target="_blank" rel="noopener noreferrer" class="btn">
               Reserve
             </a>
-            <a href="https://instagram.com/totto_okinawa" target="_blank" rel="noopener noreferrer" class="btn">
+            <a href="https://www.instagram.com/totto_okinawa/" target="_blank" rel="noopener noreferrer" class="btn">
               Instagram
             </a>
           </div>
@@ -1787,6 +1865,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTop" aria-label="ページトップへ戻る">&#8593;</button>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1799,7 +1880,7 @@
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.781 3.632 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.182.408-2.26 1.332-3.031.88-.735 2.088-1.16 3.596-1.264 1.282-.09 2.453.04 3.506.378.01-.567-.04-1.095-.155-1.575-.348-1.453-1.262-2.2-2.715-2.22-1.012.012-1.87.34-2.478.948l-1.478-1.378c.907-.972 2.16-1.509 3.63-1.553h.03c1.163 0 2.14.318 2.906.946 1.012.832 1.632 2.12 1.842 3.831.255-.058.514-.103.775-.134l.095-.013.578 1.91-.095.028c-.387.117-.806.206-1.248.267.056.578.065 1.186.024 1.819-.127 1.93-.838 3.58-2.112 4.9-1.437 1.489-3.479 2.308-6.084 2.435-.07.004-.14.005-.21.005zm.828-9.554c-1.073.075-1.927.355-2.542.834-.527.41-.79.927-.762 1.496.04.749.47 1.32 1.209 1.608.542.211 1.17.302 1.87.266 1.087-.06 1.91-.46 2.446-1.187.432-.586.704-1.38.823-2.387-.95-.282-1.988-.418-3.044-.346z"/></svg>
       </a>
     </div>
-    <p class="footer-copy">&copy; 2025 Sotto - Tiramisù - Grocery. All rights reserved.</p>
+    <p class="footer-copy">&copy; 2026 Sotto - Tiramisù - Grocery. All rights reserved.</p>
   </footer>
 
   <script>
@@ -1822,6 +1903,37 @@
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
     }
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY + 120;
+      let currentId = '';
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollY) {
+          currentId = section.id;
+        }
+      });
+      navAnchors.forEach(a => {
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + currentId) {
+          a.style.color = '#C4A76C';
+        }
+      });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // Fade-in on scroll
     const fadeEls = document.querySelectorAll('.fade-in');
@@ -1846,13 +1958,30 @@
       });
     }
 
-    // FAQ accordion
+    // Instagram embed fallback
+    setTimeout(() => {
+      document.querySelectorAll('.ig-post').forEach(post => {
+        const iframe = post.querySelector('iframe');
+        const blockquote = post.querySelector('blockquote');
+        if (!iframe && blockquote) {
+          post.classList.add('ig-failed');
+        }
+      });
+    }, 8000);
+
+    // FAQ accordion with aria
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
         const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   </script>
