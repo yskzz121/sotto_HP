@@ -1270,12 +1270,115 @@
     .ig-post.ig-failed blockquote {
       display: none;
     }
+
+    /* ============================================================
+       SOTTO ANIMATIONS — Classico
+       ① Ken Burns  ② Stagger  ④ Philosophy  ⑤ Menu Hover
+       ⑥ Timeline  ⑦ Voices Slide  ⑧ Nav Blur
+    ============================================================ */
+
+    /* ① Ken Burns — Hero背景パターン */
+    .sotto-hero-img {
+      transform-origin: center center;
+      animation: sottoBurns 18s ease-in-out forwards;
+    }
+    @keyframes sottoBurns {
+      0%   { opacity: 0;   transform: scale(1.06) translate(0.8%, 0.4%); }
+      8%   { opacity: 0.08; }
+      100% { opacity: 0.08; transform: scale(1.15) translate(-0.6%, -0.3%); }
+    }
+
+    /* ② Stagger Reveal */
+    .sotto-s1 { opacity: 0; transform: translateY(18px);
+      animation: sottoFadeUp 1s cubic-bezier(.22,.61,.36,1) 0.7s forwards; }
+    .sotto-s2 { opacity: 0; transform: translateY(18px);
+      animation: sottoFadeUp 1s cubic-bezier(.22,.61,.36,1) 1.1s forwards; }
+    .sotto-s3 { opacity: 0; transform: translateY(18px);
+      animation: sottoFadeUp 1s cubic-bezier(.22,.61,.36,1) 1.6s forwards; }
+    @keyframes sottoFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ② セパレーター線 */
+    .sotto-sep {
+      display: block; width: 0; height: 1px;
+      background: rgba(196, 167, 108, 0.65);
+      margin: 0 auto 2.5rem; opacity: 0;
+      animation: sottoLine 1s cubic-bezier(.22,.61,.36,1) 1.35s forwards;
+    }
+    @keyframes sottoLine { to { width: 50px; opacity: 0.7; } }
+
+    /* ④ Philosophy Stagger */
+    .sotto-phil-card {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .sotto-phil-card.visible { opacity: 1; transform: translateY(0); }
+
+    /* ⑤ Menu Hover */
+    .sotto-menu-card {
+      transition: transform 0.4s cubic-bezier(.22,.61,.36,1), box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+    .sotto-menu-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .sotto-menu-card img {
+      transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
+    }
+    .sotto-menu-card:hover img { transform: scale(1.04); }
+
+    /* ⑥ Timeline Dot */
+    .sotto-timeline-item {
+      opacity: 0; transform: translateX(-12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .sotto-timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    /* ⑦ Voices Auto-slide */
+    .sotto-voices-overflow { overflow: hidden; }
+    .sotto-voices-track {
+      display: flex; gap: 2rem;
+      animation: sottoSlide 38s linear infinite;
+      width: max-content;
+    }
+    .sotto-voices-track:hover { animation-play-state: paused; }
+    @keyframes sottoSlide {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .sotto-voices-track .voice-card {
+      flex: 0 0 300px;
+      min-width: 300px;
+    }
+
+    /* ⑧ Nav Blur */
+    .sotto-nav {
+      transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s;
+    }
+    .sotto-nav.is-scrolled {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .sotto-hero-img, .sotto-s1, .sotto-s2, .sotto-s3,
+      .sotto-phil-card, .sotto-menu-card,
+      .sotto-timeline-item, .sotto-voices-track {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="nav" id="nav">
+  <nav class="nav sotto-nav" id="nav">
     <a href="#hero" class="nav-logo">
       <img src="images/logo_sotto_white.png" alt="Sotto">
     </a>
@@ -1296,13 +1399,13 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <img src="images/Sotto_pattern.png" alt="" class="hero-pattern">
+    <img src="images/Sotto_pattern.png" alt="" class="hero-pattern sotto-hero-img">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <img src="images/logo_sotto_Gold.png" alt="Sotto" class="hero-logo">
-      <p class="hero-subtitle">Tiramisù &amp; Grocery</p>
-      <div class="hero-divider"></div>
-      <p class="hero-tagline">トレヴィーゾの記憶を、沖縄から一さじずつ。</p>
+      <img src="images/logo_sotto_Gold.png" alt="Sotto" class="hero-logo sotto-s1">
+      <p class="hero-subtitle sotto-s2">Tiramisù &amp; Grocery</p>
+      <span class="sotto-sep"></span>
+      <p class="hero-tagline sotto-s3">トレヴィーゾの記憶を、沖縄から一さじずつ。</p>
     </div>
   </section>
 
@@ -1332,27 +1435,27 @@
             初日はなめらかでクリーミーな食感を、翌日はビスキュイがしっとりと馴染んだ深い味わいを——一つのティラミスで、二つの表情をお楽しみいただけます。
           </p>
           <div class="philosophy-features">
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Mascarpone</div>
               <div class="value">イタリアから毎週空輸</div>
             </div>
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Method</div>
               <div class="value">生クリーム・メレンゲ不使用</div>
             </div>
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Savoiardi</div>
               <div class="value">ビスケットまで全て手作り</div>
             </div>
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Cocoa</div>
               <div class="value">注文ごとにかけたて</div>
             </div>
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Adjust</div>
               <div class="value">届く素材の状態で毎回微調整</div>
             </div>
-            <div class="philosophy-feature">
+            <div class="philosophy-feature sotto-phil-card">
               <div class="label">Two Days</div>
               <div class="value">初日と翌日、二つの味わい</div>
             </div>
@@ -1372,7 +1475,7 @@
       </div>
       <div class="menu-grid">
         <!-- Whole Tiramisu -->
-        <div class="menu-card fade-in">
+        <div class="menu-card fade-in sotto-menu-card">
           <img src="images/Tiramisu_02.JPG" alt="ホールティラミス" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">ホールティラミス</h3>
@@ -1386,7 +1489,7 @@
           </div>
         </div>
         <!-- Mini Cup -->
-        <div class="menu-card fade-in">
+        <div class="menu-card fade-in sotto-menu-card">
           <img src="images/MiniTiramisu_01.jpg" alt="ミニティラミスカップ" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">ミニティラミスカップ</h3>
@@ -1400,7 +1503,7 @@
           </div>
         </div>
         <!-- Enzyme Drink -->
-        <div class="menu-card fade-in">
+        <div class="menu-card fade-in sotto-menu-card">
           <img src="images/drink_01.jpg" alt="手作り酵素ドリンク" class="menu-card-image" loading="lazy">
           <div class="menu-card-body">
             <h3 class="menu-card-name">手作り酵素ドリンク</h3>
@@ -1456,23 +1559,23 @@
             そのふたつが静かに重なる場所が、Sottoです。
           </p>
           <div class="story-timeline">
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">La Bettola</div>
               <div class="event">東京・銀座の名店で修業</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">Italy</div>
               <div class="event">北イタリア・フィレンツェで約4年間修業</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">ARDOR</div>
               <div class="event">沖縄・北谷の名店でシェフを務める</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">2021</div>
               <div class="event">妻とともにSottoをオープン</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">2022</div>
               <div class="event">姉妹店Totto（カウンターイタリアン）開業</div>
             </div>
@@ -1509,19 +1612,19 @@
             日々の気づきを綴り、Sottoの空気感を言葉でも届けている。
           </p>
           <div class="story-timeline">
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">Tokyo</div>
               <div class="event">アパレル企業でファッション・インテリアの世界へ</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">Italy</div>
               <div class="event">フィレンツェ＆北イタリアで約4年間の暮らし</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">2021</div>
               <div class="event">夫婦でSottoをオープン、店舗運営を担う</div>
             </div>
-            <div class="story-timeline-item">
+            <div class="story-timeline-item sotto-timeline-item">
               <div class="year">ciromedia</div>
               <div class="event">ブログで沖縄の暮らしと食の物語を発信</div>
             </div>
@@ -1592,42 +1695,82 @@
         <p class="heading-jp">お客様の声</p>
         <div class="section-divider"></div>
       </div>
-      <div class="voices-grid">
-        <div class="voice-card fade-in">
-          <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
-            <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
-            <div class="voice-source">Google 口コミより</div>
-          </a>
-        </div>
-        <div class="voice-card fade-in">
-          <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
-            <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
-            <div class="voice-source">グルメブログより</div>
-          </a>
-        </div>
-        <div class="voice-card fade-in">
-          <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
-            <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
-            <div class="voice-source">RETRIP 口コミより</div>
-          </a>
-        </div>
-        <div class="voice-card fade-in">
-          <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
-            <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
-            <div class="voice-source">食べログ 口コミより</div>
-          </a>
-        </div>
-        <div class="voice-card fade-in">
-          <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
-            <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
-            <div class="voice-source">グルメブログより</div>
-          </a>
-        </div>
-        <div class="voice-card fade-in">
-          <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
-            <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
-            <div class="voice-source">ciromedia より</div>
-          </a>
+      <div class="sotto-voices-overflow">
+        <div class="voices-grid sotto-voices-track">
+          <!-- 元の6件 -->
+          <div class="voice-card">
+            <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
+              <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
+              <div class="voice-source">Google 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
+              <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
+              <div class="voice-source">グルメブログより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
+              <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
+              <div class="voice-source">RETRIP 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
+              <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
+              <div class="voice-source">食べログ 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
+              <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
+              <div class="voice-source">グルメブログより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
+              <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
+              <div class="voice-source">ciromedia より</div>
+            </a>
+          </div>
+          <!-- シームレスループ用複製 -->
+          <div class="voice-card">
+            <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
+              <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
+              <div class="voice-source">Google 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
+              <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
+              <div class="voice-source">グルメブログより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
+              <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
+              <div class="voice-source">RETRIP 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
+              <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
+              <div class="voice-source">食べログ 口コミより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
+              <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
+              <div class="voice-source">グルメブログより</div>
+            </a>
+          </div>
+          <div class="voice-card">
+            <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
+              <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
+              <div class="voice-source">ciromedia より</div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -2003,6 +2146,27 @@
         }
       });
     });
+  </script>
+
+  <script>
+  /* Sotto Animations — ④ Philosophy + ⑥ Timeline IntersectionObserver */
+  (function() {
+    var observed = document.querySelectorAll('.sotto-phil-card, .sotto-timeline-item');
+    if (observed.length && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var i = Array.from(observed).indexOf(el);
+            el.style.transitionDelay = (i % 6 * 0.1) + 's';
+            el.classList.add('visible');
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15 });
+      observed.forEach(function(el) { io.observe(el); });
+    }
+  })();
   </script>
 
 </body>
