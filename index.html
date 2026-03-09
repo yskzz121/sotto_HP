@@ -1336,22 +1336,7 @@
     }
     .sotto-timeline-item.visible { opacity: 1; transform: translateX(0); }
 
-    /* ⑦ Voices Auto-slide */
-    .sotto-voices-overflow { overflow: hidden; }
-    .sotto-voices-track {
-      display: flex; gap: 2rem;
-      animation: sottoSlide 38s linear infinite;
-      width: max-content;
-    }
-    .sotto-voices-track:hover { animation-play-state: paused; }
-    @keyframes sottoSlide {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .sotto-voices-track .voice-card {
-      flex: 0 0 300px;
-      min-width: 300px;
-    }
+
 
     /* ⑧ Nav Blur */
     .sotto-nav {
@@ -1362,18 +1347,11 @@
       -webkit-backdrop-filter: blur(14px);
     }
 
-    /* ⑦ Voices モバイル速度調整 */
-    @media (max-width: 768px) {
-      .sotto-voices-track {
-        animation-duration: 85s;
-      }
-    }
-
     /* reduced-motion */
     @media (prefers-reduced-motion: reduce) {
       .sotto-hero-img, .sotto-s1, .sotto-s2, .sotto-s3,
       .sotto-phil-card, .sotto-menu-card,
-      .sotto-timeline-item, .sotto-voices-track {
+      .sotto-timeline-item {
         animation: none !important;
         transition: none !important;
         opacity: 1 !important;
@@ -1702,82 +1680,42 @@
         <p class="heading-jp">お客様の声</p>
         <div class="section-divider"></div>
       </div>
-      <div class="sotto-voices-overflow">
-        <div class="voices-grid sotto-voices-track">
-          <!-- 元の6件 -->
-          <div class="voice-card">
-            <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
-              <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
-              <div class="voice-source">Google 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
-              <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
-              <div class="voice-source">グルメブログより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
-              <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
-              <div class="voice-source">RETRIP 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
-              <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
-              <div class="voice-source">食べログ 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
-              <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
-              <div class="voice-source">グルメブログより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
-              <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
-              <div class="voice-source">ciromedia より</div>
-            </a>
-          </div>
-          <!-- シームレスループ用複製 -->
-          <div class="voice-card">
-            <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
-              <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
-              <div class="voice-source">Google 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
-              <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
-              <div class="voice-source">グルメブログより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
-              <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
-              <div class="voice-source">RETRIP 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
-              <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
-              <div class="voice-source">食べログ 口コミより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
-              <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
-              <div class="voice-source">グルメブログより</div>
-            </a>
-          </div>
-          <div class="voice-card">
-            <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
-              <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
-              <div class="voice-source">ciromedia より</div>
-            </a>
-          </div>
+      <div class="voices-grid">
+        <div class="voice-card fade-in">
+          <a href="https://www.google.com/maps/search/Sotto+%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E5%98%89%E6%95%B04-6-7" target="_blank" rel="noopener noreferrer">
+            <p>甘すぎず、苦すぎず、全体のバランスが完璧。今まで食べたティラミスの中で間違いなく一番。エスプレッソの染み込み具合がちょうどよくて、マスカルポーネとの口当たりが最高でした。</p>
+            <div class="voice-source">Google 口コミより</div>
+          </a>
+        </div>
+        <div class="voice-card fade-in">
+          <a href="https://ameblo.jp/melomelosun/entry-12800575430.html" target="_blank" rel="noopener noreferrer">
+            <p>普段ティラミスが好きじゃないのに、ここのは別物。生クリームを使っていないからか、重くなくて、素材の味がストレートに伝わってくる。大人のスイーツという言葉がぴったりです。</p>
+            <div class="voice-source">グルメブログより</div>
+          </a>
+        </div>
+        <div class="voice-card fade-in">
+          <a href="https://rtrp.jp/spots/924b174c-5f62-4be2-8aa1-dfb9c0aadc41/" target="_blank" rel="noopener noreferrer">
+            <p>翌日食べたら、ビスキュイがしっとり馴染んでまた違う美味しさに。一つで二度楽しめるって素晴らしい。保冷バッグ持参で通ってます。</p>
+            <div class="voice-source">RETRIP 口コミより</div>
+          </a>
+        </div>
+        <div class="voice-card fade-in">
+          <a href="https://tabelog.com/okinawa/A4703/A470404/47031453/" target="_blank" rel="noopener noreferrer">
+            <p>店内にはイタリアの蚤の市で集めたような雑貨が並んでいて、テイクアウト専門なのに来店するだけでワクワクする。東京のデパ地下で展開したら大ブレイクすると思う。</p>
+            <div class="voice-source">食べログ 口コミより</div>
+          </a>
+        </div>
+        <div class="voice-card fade-in">
+          <a href="https://tamagoblog.com/okinawa/sotto/" target="_blank" rel="noopener noreferrer">
+            <p>手土産として持って行ったら大絶賛でした。沖縄からの贈り物として、ちんすこうの上位互換です。ギフトに使えるのが本当にありがたい。</p>
+            <div class="voice-source">グルメブログより</div>
+          </a>
+        </div>
+        <div class="voice-card fade-in">
+          <a href="https://www.shiohirachihiro.com/entry/okinawa-sotto-tiramisu-labo" target="_blank" rel="noopener noreferrer">
+            <p>オープン当初は秒で完売してなかなか買えなかった「幻のティラミス」。今は予約なしで買えるようになったけど、味のクオリティはまったく変わらない。むしろ進化してる。</p>
+            <div class="voice-source">ciromedia より</div>
+          </a>
         </div>
       </div>
     </div>
